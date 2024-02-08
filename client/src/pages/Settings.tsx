@@ -1,7 +1,7 @@
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 
-function Bookings() {
+function Settings() {
   return (
     <Row type="horizontal">
       <Heading as="h1">Settings</Heading>
@@ -10,4 +10,4 @@ function Bookings() {
   );
 }
 
-export default Bookings;
+export default Settings;

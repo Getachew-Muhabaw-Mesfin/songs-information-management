@@ -1,8 +1,8 @@
 import Heading from "../ui/Heading";
 // import Row from "../ui/Row";
 
-function Bookings() {
-  return <Heading as="h1">Statistics</Heading>;
-}
+const Statistics = () => {
+  return <Heading>Statistics</Heading>;
+};
 
-export default Bookings;
+export default Statistics;

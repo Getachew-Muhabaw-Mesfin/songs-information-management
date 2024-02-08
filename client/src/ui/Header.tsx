@@ -7,7 +7,7 @@ const StyledHeader = styled.header`
 `;
 
 function Header() {
-  return <StyledHeader>HEADER</StyledHeader>;
+  return <StyledHeader as='h2'>Songs Information Management System</StyledHeader>;
 }
 
 export default Header;

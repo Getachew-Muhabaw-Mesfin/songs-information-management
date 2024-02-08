@@ -8,10 +8,10 @@ const {
   deleteSong,
 } = require("../controllers/songController");
 
-router.post("/songs", createSong);
-router.get("/songs", getAllSongs);
-router.patch("/songs/:id", updateSong);
-router.get("/songs/:id", getSingleSong);
-router.delete("/songs/:id", deleteSong);
+router.post("/", createSong);
+router.get("/", getAllSongs);
+router.patch("/:id", updateSong);
+router.get("/:id", getSingleSong);
+router.delete("/:id", deleteSong);
 
 module.exports = router;

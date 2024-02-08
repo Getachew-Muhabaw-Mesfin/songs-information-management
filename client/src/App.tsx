@@ -6,6 +6,7 @@ import Albums from "./pages/Albums";
 import Statistics from "./pages/Statistics";
 import Settings from "./pages/Settings";
 
+
 function App() {
   return (
     <>

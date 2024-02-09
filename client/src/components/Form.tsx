@@ -2,11 +2,12 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../services/redux/store";
 import { setSongSlice } from "../services/redux/slice/song";
-import {
-  createSongSlice,
-  updateSongSlice,
-} from "../services/redux/slice/songs";
+// import {
+//   createSongSlice,
+//   updateSongSlice,
+// } from "../services/redux/slice/songs";
 import { nanoid } from "@reduxjs/toolkit";
+import {CREATE_SONG} from "../services/redux/types/index";
 
 const Form = () => {
   const song = useSelector((state: RootState) => state.song);
@@ -20,7 +21,11 @@ const Form = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    song.id ? dispatch(createSongSlice({...song,id:nanoid(8)})) : dispatch(updateSongSlice(song));
+    song.id? dispatch(dispatch({type:CREATE_SONG,payload:{...song,id:nanoid(8)}})):dispatch(dispatch({type:CREATE_SONG,payload:song}));
+    
+    // song.id
+    //   ? dispatch(createSongSlice({ ...song, id: nanoid(8) }))
+    //   : dispatch(updateSongSlice(song));
     dispatch(
       setSongSlice({ id: "", title: "", artist: "", album: "", genre: "" })
     );

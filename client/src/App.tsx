@@ -1,6 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import GlobalStyles from "./styles/GlobalStyles";
-import AppLayout from "./ui/AppLayout";
+import AppLayout from "./components/ui/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import Albums from "./pages/Albums";
 import Statistics from "./pages/Statistics";

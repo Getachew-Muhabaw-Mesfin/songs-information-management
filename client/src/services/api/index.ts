@@ -25,7 +25,7 @@ export const createSongAPI = async (
 ): Promise<AxiosResponse<Song>> => axios.post("/songs", song);
 export const getSongsAPI = async (): Promise<AxiosResponse<Song[]>> =>
   axios.get("/songs");
-export const getSongAPI = async (id: string): Promise<AxiosResponse<Song>> =>
+export const getSongByIdAPI = async (id: string): Promise<AxiosResponse<Song>> =>
   axios.get(`/songs/${id}`);
 export const updateSongAPI = async (
   id: string,

@@ -12,7 +12,8 @@ const songsSlice = createSlice({
     },
   ],
   reducers: {
-    getSongsSlice: (state) => {
+    getSongsSlice: (state,action) => {
+        state = action.payload
       return state;
     },
     createSongSlice: (state, action) => {

@@ -33,11 +33,14 @@ const TableHeader = styled.header`
 const SongTable=() =>{
     const songs = useSelector((state: RootState) => state.songs);
     const s = useSelector((state: RootState) => state.song);
-    console.log(songs)
     const dispatch = useDispatch();
     useEffect(() => {
       dispatch({ type: GET_SONGS });
     }, [s, dispatch]);
+
+     if (!Array.isArray(songs)) {
+       return null;
+     }
   return (
     <Table role="table">
       <TableHeader role="row">
@@ -48,7 +51,7 @@ const SongTable=() =>{
         <div>Genre</div>
         <div>Actions</div>
       </TableHeader>
-      {songs.map(
+      {songs?.map(
         (song, index) =>
           song._id && ( // Check if _id exists before rendering
             <SongRow

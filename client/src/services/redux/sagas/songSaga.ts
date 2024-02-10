@@ -4,12 +4,14 @@ import {
   createSongAPI,
   updateSongAPI,
   deleteSongAPI,
+  getStatisticsAPI
 } from "../../api";
 import {
   getSongsSlice,
   createSongSlice,
   updateSongSlice,
   deleteSongSlice,
+  getStatistics
 } from "../slice/songsSlice";
 
 import {
@@ -17,6 +19,7 @@ import {
   CREATE_SONG,
   UPDATE_SONG_BY_ID,
   DELETE_SONG_BY_ID,
+  GET_STATISTICS,
 } from "../types";
 import { AxiosResponse } from "axios";
 interface Song {
@@ -36,16 +39,6 @@ export function* getSongsSaga() {
   }
 }
 
-// Worker Saga for fetching all songs
-// export function* handleGetSongs() {
-//   try {
-//     const response: AxiosResponse<Song[]> = yield call(getSongsAPI);
-//     yield put(getSongsSlice(response.data));
-//     console.log("Testing Get songs...", response.data);
-//   } catch (error) {
-//     console.error("Error fetching songs:", error);
-//   }
-// }
 
 // Worker Saga for creating a new song
 export function* handleCreateSong(action: { type: string; payload: Song }) {
@@ -57,7 +50,6 @@ export function* handleCreateSong(action: { type: string; payload: Song }) {
     yield put(createSongSlice(response.data));
     console.log("Testing Create song...", response.data);
   } catch (error) {
-    // Handle error
     console.error("Error creating song:", error);
   }
 }
@@ -93,11 +85,22 @@ export function* deleteSongByIdSaga(action: DeleteSongAction) {
   }
 }
 
+export function* getStatisticsSaga() {
+  try {
+    const statistics: AxiosResponse<Song[]> = yield call(getStatisticsAPI);
+    yield put(getStatistics(statistics.data));
+  } catch (error) {
+    console.error("Error fetching statistics:", error);
+  }
+
+}
+
 // Watcher Saga to watch for Redux actions
 export function* watchSongsSagaAsync() {
   yield takeEvery(GET_SONGS, getSongsSaga);
   yield takeEvery(CREATE_SONG, handleCreateSong);
   yield takeEvery(UPDATE_SONG_BY_ID, handleUpdateSong);
   yield takeEvery(DELETE_SONG_BY_ID, deleteSongByIdSaga);
+  yield takeEvery(GET_STATISTICS, getStatisticsSaga);
 }
 

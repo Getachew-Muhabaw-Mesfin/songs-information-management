@@ -34,3 +34,6 @@ export const updateSongAPI = async (
 
 export const deleteSongAPI = async (_id: string): Promise<AxiosResponse<void>> =>
   axios.delete(`/songs/${_id}`);
+
+  export const getStatisticsAPI = async (): Promise<AxiosResponse<Song[]>> =>
+    axios.get("/statistics");

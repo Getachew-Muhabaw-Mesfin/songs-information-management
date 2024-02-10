@@ -6,8 +6,9 @@ const createSong = async (req, res) => {
     const { title, artist, album, genre } = req.body;
     const newSong = await Song.create({ title, artist, album, genre });
     res.status(201).json({
-        status: 'success',
-        newSong});
+      status: "success",
+      newSong,
+    });
   } catch (error) {
     res.status(500).json({ status: "failed", error: error.message });
   }
@@ -17,11 +18,7 @@ const createSong = async (req, res) => {
 const getAllSongs = async (req, res) => {
   try {
     const songs = await Song.find();
-    res.json({
-      status: 'success',
-      total: songs.length,
-      songs,
-    });
+    res.json(songs);
   } catch (error) {
     res.status(500).json({ status: "failed", error: error.message });
   }
@@ -35,7 +32,7 @@ const getSingleSong = async (req, res) => {
     if (!song) {
       return res.status(404).json({ message: "Song not found" });
     }
-    res.json({status:'success',song});
+    res.json({ status: "success", song });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -54,7 +51,7 @@ const updateSong = async (req, res) => {
     if (!updatedSong) {
       return res.status(404).json({ message: "Song not found" });
     }
-    res.json({status:"success",updatedSong});
+    res.json({ status: "success", updatedSong });
   } catch (error) {
     res.status(500).json({ status: "failed", error: error.message });
   }

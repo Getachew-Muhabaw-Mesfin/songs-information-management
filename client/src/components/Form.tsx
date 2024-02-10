@@ -2,35 +2,38 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../services/redux/store";
 import { setSongSlice } from "../services/redux/slice/song";
-// import {
-//   createSongSlice,
-//   updateSongSlice,
-// } from "../services/redux/slice/songs";
 import { nanoid } from "@reduxjs/toolkit";
 import {CREATE_SONG} from "../services/redux/types/index";
 
 const Form = () => {
   const song = useSelector((state: RootState) => state.song);
-  const dispatch = useDispatch(); // Get the dispatch function from Redux
+  const dispatch = useDispatch(); 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    // Dispatch an action to update the song state
     dispatch(setSongSlice({ ...song, [name]: value }));
   };
 
+  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   song.id? dispatch(dispatch({type:CREATE_SONG,payload:{...song,id:nanoid(8)}})):dispatch(dispatch({type:CREATE_SONG,payload:song}));
+  //   dispatch(
+  //     setSongSlice({ id: "", title: "", artist: "", album: "", genre: "" })
+  //   );
+  //   console.log(song);
+  // };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    song.id? dispatch(dispatch({type:CREATE_SONG,payload:{...song,id:nanoid(8)}})):dispatch(dispatch({type:CREATE_SONG,payload:song}));
-    
-    // song.id
-    //   ? dispatch(createSongSlice({ ...song, id: nanoid(8) }))
-    //   : dispatch(updateSongSlice(song));
+    const newSong = {
+      ...song,
+      id: song.id ? nanoid(8) : undefined, // Generate new ID only if it's not provided
+    };
+    dispatch({ type: CREATE_SONG, payload: newSong });
     dispatch(
       setSongSlice({ id: "", title: "", artist: "", album: "", genre: "" })
     );
-    console.log(song);
   };
+
 
   return (
     <div>

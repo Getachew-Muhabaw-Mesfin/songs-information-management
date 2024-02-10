@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import SongRow from "./ui/SongRow";
+import SongRow from "./SongRow";
 import { useEffect } from "react";
 import { RootState } from "../services/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_SONGS } from "../services/redux/types/index";
+import { GET_SONGS,DELETE_SONG_BY_ID } from "../services/redux/types/index";
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);
@@ -47,9 +47,20 @@ const SongTable=() =>{
         <div>Genre</div>
         <div>Actions</div>
       </TableHeader>
-      {songs.map((song, index) => (
-        <SongRow key={song.id} song={song} number={index} />
-      ))}
+      {songs.map(
+        (song, index) =>
+          song._id && ( // Check if _id exists before rendering
+            <SongRow
+              key={song._id}
+              song={song}
+              number={index}
+              id={song._id}
+              onDelete={() =>
+                dispatch({ type: DELETE_SONG_BY_ID, id: song._id })
+              }
+            />
+          )
+      )}
     </Table>
   );
 }

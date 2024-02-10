@@ -20,13 +20,12 @@ import {
 } from "../types";
 import { AxiosResponse } from "axios";
 interface Song {
-  id: string;
+  _id: string;
   title: string;
   artist: string;
   album: string;
   genre: string;
 }
-
 
 export function* getSongsSaga(): Generator<unknown, void, AxiosResponse<any>> {
   try {
@@ -67,11 +66,11 @@ export function* handleCreateSong(action: { type: string; payload: Song }) {
 // Worker Saga for updating an existing song
 export function* handleUpdateSong(action: {
   type: string;
-  payload: { id: string; song: Song };
+  payload: { _id: string; song: Song };
 }) {
   try {
-    const { id, song } = action.payload;
-    const response: AxiosResponse<Song> = yield call(updateSongAPI, id, song);
+    const { _id, song } = action.payload;
+    const response: AxiosResponse<Song> = yield call(updateSongAPI, _id, song);
     yield put(updateSongSlice(response.data));
     console.log("Testing Update song...", response.data);
   } catch (error) {
@@ -91,6 +90,30 @@ export function* handleDeleteSong(action: { type: string; payload: string }) {
     console.error("Error deleting song:", error);
   }
 }
+
+// export function* deleteUserByIdSaga(action) {
+//     yield deleteUserByIdAPI(action.id)
+//     yield put(deleteUserSlice(action.id))
+// }
+
+// interface DeleteSongAction {
+//   type: typeof DELETE_SONG_BY_ID;
+//   _id: string;
+// }
+// export function* deleteSongByIdSaga(action) {
+//     yield deleteSongAPI(action.id)
+//     yield put(deleteSongSlice(action.id))
+
+// }
+// export function* deleteSongByIdSaga(action: DeleteSongAction) {
+//   try {
+//     yield call(deleteSongAPI, action._id);
+//     yield put(deleteSongSlice(action._id));
+//     console.log(action._id, "Testing Delete song...")
+//   } catch (error) {
+//     console.error("Error deleting song:", error);
+//   }
+// }
 
 // Watcher Saga to watch for Redux actions
 export function* watchSongsSagaAsync() {

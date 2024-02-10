@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const songSlice = createSlice({
     name: "song",
     initialState: {
-        id: '',
+        _id: '',
         title: "",
         artist: "",
         album: "",

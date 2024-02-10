@@ -27,8 +27,8 @@ const getAllSongs = async (req, res) => {
 // Get a single song by ID
 const getSingleSong = async (req, res) => {
   try {
-    const { id } = req.params;
-    const song = await Song.findById(id);
+    const { _id } = req.params;
+    const song = await Song.findById(_id);
     if (!song) {
       return res.status(404).json({ message: "Song not found" });
     }
@@ -41,10 +41,10 @@ const getSingleSong = async (req, res) => {
 // Update a song by ID
 const updateSong = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { _id } = req.params;
     const { title, artist, album, genre } = req.body;
     const updatedSong = await Song.findByIdAndUpdate(
-      id,
+      _id,
       { title, artist, album, genre },
       { new: true }
     );
@@ -60,8 +60,8 @@ const updateSong = async (req, res) => {
 // Delete a song by ID
 const deleteSong = async (req, res) => {
   try {
-    const { id } = req.params;
-    const deletedSong = await Song.findByIdAndDelete(id);
+    const { _id } = req.params;
+    const deletedSong = await Song.findByIdAndDelete(_id);
     if (!deletedSong) {
       return res.status(404).json({ message: "Song not found" });
     }

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
-
 const TableRow = styled.div`
   display: grid;
   grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
@@ -31,16 +30,18 @@ const Album = styled.div`
   color: var(--color-green-700);
 `;
 
-const SongRow = ({ song, number }) => {
+const SongRow = ({ song, number, onDelete,id }) => {
   const { title, artist, album, genre } = song;
+  console.log(id)
   return (
     <>
       <TableRow role="row">
-        <RowData role="cell">{number+1}</RowData>
+        <RowData role="cell">{number + 1}</RowData>
         <RowData role="cell">{title}</RowData>
         <Artist role="cell">{artist}</Artist>
         <Album role="cell">{album}</Album>
         <RowData role="cell">{genre}</RowData>
+       
         <div>
           <button onClick={() => {}}>
             <HiSquare2Stack />
@@ -48,7 +49,7 @@ const SongRow = ({ song, number }) => {
           <button onClick={() => {}}>
             <HiPencil />
           </button>
-          <button onClick={() => {}}>
+          <button onClick={onDelete}>
             <HiTrash />
           </button>
         </div>

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface Song {
-  id: string;
+  _id: string;
   title: string;
   artist: string;
   album: string;
@@ -12,7 +12,7 @@ interface SongsState extends Array<Song> {}
 
 const initialState: SongsState = [
   {
-    id: "",
+    _id: "",
     title: "",
     artist: "",
     album: "",
@@ -34,13 +34,12 @@ const songsSlice = createSlice({
     },
     updateSongSlice: (state, action: PayloadAction<Song>) => {
       state = state.map((i) =>
-        i.id == action.payload.id ? action.payload : i
+        i._id == action.payload._id ? action.payload : i
       );
       return state;
     },
     deleteSongSlice: (state, action: PayloadAction<string>) => {
-      state = state.filter((i) => i.id !== action.payload);
-      return state;
+      return state.filter((song) => song._id !== action.payload);
     },
   },
 });

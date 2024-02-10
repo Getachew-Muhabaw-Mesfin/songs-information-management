@@ -10,8 +10,8 @@ const {
 
 router.post("/", createSong);
 router.get("/", getAllSongs);
-router.patch("/:id", updateSong);
-router.get("/:id", getSingleSong);
-router.delete("/:id", deleteSong);
+router.patch("/:_id", updateSong);
+router.get("/:_id", getSingleSong);
+router.delete("/:_id", deleteSong);
 
 module.exports = router;

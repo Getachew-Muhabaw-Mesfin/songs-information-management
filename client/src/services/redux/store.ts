@@ -12,7 +12,7 @@ const store = configureStore({
     songs: songsReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),
+    getDefaultMiddleware().concat(sagaMiddleware),
 });
 
 sagaMiddleware.run(rootSaga);

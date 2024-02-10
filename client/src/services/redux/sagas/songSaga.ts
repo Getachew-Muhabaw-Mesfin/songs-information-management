@@ -93,8 +93,8 @@ function* handleDeleteSong(action: { type: string; payload: string }) {
   }
 }
 
-// // Watcher Saga to watch for Redux actions
-export function* watchSongsSaga() {
+// Watcher Saga to watch for Redux actions
+export function* watchSongsSagaAsync() {
   yield takeEvery(GET_SONGS, handleGetSongs);
   yield takeEvery(CREATE_SONG, handleCreateSong);
   yield takeEvery(UPDATE_SONG_BY_ID, handleUpdateSong);

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
+import { HiPencil,  HiTrash } from "react-icons/hi2";
 const TableRow = styled.div`
   display: grid;
   grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
@@ -29,9 +29,27 @@ const Album = styled.div`
   font-weight: 500;
   color: var(--color-green-700);
 `;
+interface Song {
+  title: string;
+  artist: string;
+  album: string;
+  genre: string;
+}
 
-const SongRow = ({ song, number, onDelete,id,onEdit }) => {
+interface SongRowProps {
+  song: Song;
+  number: number;
+  onDelete: () => void; 
+  onEdit: () => void; 
+}
+const SongRow: React.FC<SongRowProps> = ({
+  song,
+  number,
+  onDelete,
+  onEdit,
+}) => {
   const { title, artist, album, genre } = song;
+
   // console.log(id)
   return (
     <>
@@ -41,13 +59,13 @@ const SongRow = ({ song, number, onDelete,id,onEdit }) => {
         <Artist role="cell">{artist}</Artist>
         <Album role="cell">{album}</Album>
         <RowData role="cell">{genre}</RowData>
-       
+
         <div>
-          <button onClick={onEdit}>
+          <button onClick={onEdit} style={{ marginRight: "1rem" }}>
             <HiPencil />
           </button>
           <button onClick={onDelete}>
-            <HiTrash />
+            <HiTrash style={{color:'red'}}/>
           </button>
         </div>
       </TableRow>

@@ -55,7 +55,6 @@ const SongTable=() =>{
               key={song._id}
               song={song}
               number={index}
-              id={song._id}
               onDelete={() =>
                 dispatch({ type: DELETE_SONG_BY_ID, _id: song._id })
               }

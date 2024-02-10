@@ -1,17 +1,19 @@
 import Heading from "../components/ui/Heading";
-// import Row from "../components/ui/Row";
-// import SongsTable from "../components/SongsTable";
+import Row from "../components/ui/Row";
 import Form from "../components/Form";
-// import Information from "../components/Information";
 import SongTable from "../components/SongTable";
 
 function Dashboard() {
   return (
-    <Heading>
-      <p>List of Songs</p>
-      <SongTable />
-      <Form />
-    </Heading>
+    <Row type="vertical">
+      <Heading>
+        <p>
+          List of Songs <button >Add</button>
+        </p>
+        <SongTable />
+        <Form />
+      </Heading>
+    </Row>
   );
 }
 

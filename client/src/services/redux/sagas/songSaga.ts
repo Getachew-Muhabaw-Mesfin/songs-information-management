@@ -27,9 +27,9 @@ interface Song {
   genre: string;
 }
 
-export function* getSongsSaga(): Generator<unknown, void, AxiosResponse<any>> {
+export function* getSongsSaga() {
   try {
-    const songs: AxiosResponse<any> = yield call(getSongsAPI);
+    const songs: AxiosResponse<Song[]> = yield call(getSongsAPI);
     yield put(getSongsSlice(songs.data));
   } catch (error) {
     console.error("Error fetching songs:", error);
@@ -37,15 +37,15 @@ export function* getSongsSaga(): Generator<unknown, void, AxiosResponse<any>> {
 }
 
 // Worker Saga for fetching all songs
-export function* handleGetSongs() {
-  try {
-    const response: AxiosResponse<Song[]> = yield call(getSongsAPI);
-    yield put(getSongsSlice(response.data));
-    console.log("Testing Get songs...", response.data);
-  } catch (error) {
-    console.error("Error fetching songs:", error);
-  }
-}
+// export function* handleGetSongs() {
+//   try {
+//     const response: AxiosResponse<Song[]> = yield call(getSongsAPI);
+//     yield put(getSongsSlice(response.data));
+//     console.log("Testing Get songs...", response.data);
+//   } catch (error) {
+//     console.error("Error fetching songs:", error);
+//   }
+// }
 
 // Worker Saga for creating a new song
 export function* handleCreateSong(action: { type: string; payload: Song }) {

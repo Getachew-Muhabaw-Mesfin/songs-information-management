@@ -4,20 +4,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { GET_SONGS } from "../services/redux/types/index";
 
 const Information = () => {
-  const songs = useSelector((state: RootState) => state.songs); // Access the inner songs array
-  console.log(typeof songs);
-  console.log(songs);
+  const songs = useSelector((state: RootState) => state.songs); 
+  const song = useSelector((state: RootState) => state.song);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({ type: GET_SONGS });
-  }, []);
+  }, [song, dispatch]);
 
   return (
     <div>
       <h1>All Songs</h1>
       <ul>
         {songs.map((song) => (
-            <li key={song._id}>
+            <li key={song.id}>
                 <p>Title: {song.title}</p>
                 <p>Artist: {song.artist}</p>
                 <p>Album: {song.album}</p>

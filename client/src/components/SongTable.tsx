@@ -4,7 +4,7 @@ import { setSongSlice } from "../services/redux/slice/song";
 import { useEffect } from "react";
 import { RootState } from "../services/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_SONGS,DELETE_SONG_BY_ID } from "../services/redux/types/index";
+import { GET_SONGS,DELETE_SONG_BY_ID,UPDATE_SONG_BY_ID } from "../services/redux/types/index";
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);

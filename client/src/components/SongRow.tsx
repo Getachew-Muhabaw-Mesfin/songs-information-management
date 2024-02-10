@@ -30,9 +30,9 @@ const Album = styled.div`
   color: var(--color-green-700);
 `;
 
-const SongRow = ({ song, number, onDelete,id }) => {
+const SongRow = ({ song, number, onDelete,id,onEdit }) => {
   const { title, artist, album, genre } = song;
-  console.log(id)
+  // console.log(id)
   return (
     <>
       <TableRow role="row">
@@ -43,10 +43,7 @@ const SongRow = ({ song, number, onDelete,id }) => {
         <RowData role="cell">{genre}</RowData>
        
         <div>
-          <button onClick={() => {}}>
-            <HiSquare2Stack />
-          </button>
-          <button onClick={() => {}}>
+          <button onClick={onEdit}>
             <HiPencil />
           </button>
           <button onClick={onDelete}>

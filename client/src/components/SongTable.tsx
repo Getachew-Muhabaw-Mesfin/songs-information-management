@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import SongRow from "./SongRow";
+import { setSongSlice } from "../services/redux/slice/song";
 import { useEffect } from "react";
 import { RootState } from "../services/redux/store";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,12 +32,12 @@ const TableHeader = styled.header`
 
 const SongTable=() =>{
     const songs = useSelector((state: RootState) => state.songs);
-    const song = useSelector((state: RootState) => state.song);
+    const s = useSelector((state: RootState) => state.song);
     console.log(songs)
     const dispatch = useDispatch();
     useEffect(() => {
       dispatch({ type: GET_SONGS });
-    }, [song, dispatch]);
+    }, [s, dispatch]);
   return (
     <Table role="table">
       <TableHeader role="row">
@@ -56,8 +57,9 @@ const SongTable=() =>{
               number={index}
               id={song._id}
               onDelete={() =>
-                dispatch({ type: DELETE_SONG_BY_ID, id: song._id })
+                dispatch({ type: DELETE_SONG_BY_ID, _id: song._id })
               }
+              onEdit={() => dispatch(setSongSlice(song))}
             />
           )
       )}

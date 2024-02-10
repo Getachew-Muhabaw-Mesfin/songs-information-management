@@ -43,7 +43,6 @@ export function* handleGetSongs() {
     yield put(getSongsSlice(response.data));
     console.log("Testing Get songs...", response.data);
   } catch (error) {
-    // Handle error
     console.error("Error fetching songs:", error);
   }
 }
@@ -79,61 +78,26 @@ export function* handleUpdateSong(action: {
   }
 }
 
-// Worker Saga for deleting a song
-export function* handleDeleteSong(action: { type: string; payload: string }) {
+interface DeleteSongAction {
+  type: typeof DELETE_SONG_BY_ID;
+  _id: string;
+}
+
+export function* deleteSongByIdSaga(action: DeleteSongAction) {
   try {
-    yield call(deleteSongAPI, action.payload);
-    yield put(deleteSongSlice(action.payload));
-    console.log("Testing Delete song...", action.payload);
+    yield call(deleteSongAPI, action._id);
+    yield put(deleteSongSlice(action._id));
+    console.log(action._id, "Testing Delete song...")
   } catch (error) {
-    // Handle error
     console.error("Error deleting song:", error);
   }
 }
-
-// export function* deleteUserByIdSaga(action) {
-//     yield deleteUserByIdAPI(action.id)
-//     yield put(deleteUserSlice(action.id))
-// }
-
-// interface DeleteSongAction {
-//   type: typeof DELETE_SONG_BY_ID;
-//   _id: string;
-// }
-// export function* deleteSongByIdSaga(action) {
-//     yield deleteSongAPI(action.id)
-//     yield put(deleteSongSlice(action.id))
-
-// }
-// export function* deleteSongByIdSaga(action: DeleteSongAction) {
-//   try {
-//     yield call(deleteSongAPI, action._id);
-//     yield put(deleteSongSlice(action._id));
-//     console.log(action._id, "Testing Delete song...")
-//   } catch (error) {
-//     console.error("Error deleting song:", error);
-//   }
-// }
 
 // Watcher Saga to watch for Redux actions
 export function* watchSongsSagaAsync() {
   yield takeEvery(GET_SONGS, getSongsSaga);
   yield takeEvery(CREATE_SONG, handleCreateSong);
   yield takeEvery(UPDATE_SONG_BY_ID, handleUpdateSong);
-  yield takeEvery(DELETE_SONG_BY_ID, handleDeleteSong);
+  yield takeEvery(DELETE_SONG_BY_ID, deleteSongByIdSaga);
 }
 
-// Worker Saga for fetching a single song by ID
-// export function* handleGetSongById(action: { type: string; payload: string }) {
-//   try {
-//     const response: AxiosResponse<Song> = yield call(
-//       getSongByIdAPI,
-//       action.payload
-//     );
-//     // Dispatch action to update state with the single song
-//     yield put(setSongSlice(response.data));
-//   } catch (error: any) {
-//     // Handle error
-//     console.error("Error fetching song by ID:", error);
-//   }
-// }

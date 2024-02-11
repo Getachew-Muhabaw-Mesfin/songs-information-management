@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { HiPencil,  HiTrash } from "react-icons/hi2";
+import EditSongModal from "./EditSongModal";
+import { useState } from "react";
 const TableRow = styled.div`
   display: grid;
   grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
@@ -30,6 +32,7 @@ const Album = styled.div`
   color: var(--color-green-700);
 `;
 interface Song {
+  _id: string;
   title: string;
   artist: string;
   album: string;
@@ -46,11 +49,19 @@ const SongRow: React.FC<SongRowProps> = ({
   song,
   number,
   onDelete,
-  onEdit,
 }) => {
+   const [showModal, setShowModal] = useState(false);
+
+   const handleEdit = () => {
+     setShowModal(true);
+   };
+
+   const handleCloseModal = () => {
+     setShowModal(false);
+   };
   const { title, artist, album, genre } = song;
 
-  // console.log(id)
+ 
   return (
     <>
       <TableRow role="row">
@@ -61,14 +72,19 @@ const SongRow: React.FC<SongRowProps> = ({
         <RowData role="cell">{genre}</RowData>
 
         <div>
-          <button onClick={onEdit} style={{ marginRight: "1rem" }}>
+          <button onClick={handleEdit} style={{ marginRight: "1rem" }}>
             <HiPencil />
           </button>
           <button onClick={onDelete}>
-            <HiTrash style={{color:'red'}}/>
+            <HiTrash style={{ color: "red" }} />
           </button>
         </div>
       </TableRow>
+      <EditSongModal
+        song={song}
+        show={showModal}
+        onHide={handleCloseModal}
+      />
     </>
   );
 };

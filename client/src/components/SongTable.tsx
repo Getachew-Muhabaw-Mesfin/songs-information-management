@@ -4,7 +4,12 @@ import SongRow from "./SongRow";
 import { useEffect } from "react";
 import { RootState } from "../services/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_SONGS,DELETE_SONG_BY_ID,UPDATE_SONG_BY_ID } from "../services/redux/types/index";
+import {
+  GET_SONGS,
+  DELETE_SONG_BY_ID,
+  UPDATE_SONG_BY_ID,
+} from "../services/redux/types/index";
+import toast from "react-hot-toast";
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);
@@ -29,18 +34,35 @@ const TableHeader = styled.header`
   color: var(--color-grey-600);
   padding: 1.6rem 2.4rem;
 `;
-
-const SongTable=() =>{
-    const songs = useSelector((state: RootState) => state.songs);
-    const s = useSelector((state: RootState) => state.song);
-    const dispatch = useDispatch();
-    useEffect(() => {
-      dispatch({ type: GET_SONGS });
-    }, [s, dispatch]);
-
-     if (!Array.isArray(songs)) {
-       return null;
-     }
+interface Song{
+  _id: string;
+  title: string;
+  artist: string;
+  album: string;
+  genre: string;
+}
+const notify = () => toast("You have successfully deleted a song!");
+const SongTable = () => {
+  const songs = useSelector((state: RootState) => state.songs);
+  // const s = useSelector((state: RootState) => state.song);
+  console.log(songs);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({ type: GET_SONGS });
+  }, [songs.length, dispatch]);
+  if (!Array.isArray(songs)) {
+    return null;
+  }
+  const handleDelete = (id: string) => {
+    dispatch({ type: DELETE_SONG_BY_ID, _id: id });
+    notify();
+  };
+  const handleEdit = (_id: string, song: Song) => {
+    dispatch({
+      type: UPDATE_SONG_BY_ID,
+      payload: { _id: song._id, song: song },
+    });
+  };
   return (
     <Table role="table">
       <TableHeader role="row">
@@ -58,23 +80,19 @@ const SongTable=() =>{
               key={song._id}
               song={song}
               number={index}
-              onDelete={() =>
-                dispatch({ type: DELETE_SONG_BY_ID, _id: song._id })
-              }
-              onEdit={() =>
-                dispatch(
-                  // Ensure the dispatched action has the correct type and payload structure
-                  {
-                    type: UPDATE_SONG_BY_ID,
-                    payload: { _id: song._id, song: song },
-                  }
-                )
-              }
+              onDelete={() =>handleDelete(song._id)}
+              onEdit={() => handleEdit(song._id, song)}
+              // onEdit={() =>
+              //   dispatch({
+              //     type: UPDATE_SONG_BY_ID,
+              //     payload: { _id: song._id, song: song },
+              //   })
+              // }
             />
           )
       )}
     </Table>
   );
-}
+};
 
 export default SongTable;

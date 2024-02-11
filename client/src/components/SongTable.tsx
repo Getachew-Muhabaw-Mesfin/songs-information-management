@@ -4,6 +4,7 @@ import SongRow from "./SongRow";
 import { useEffect } from "react";
 import { RootState } from "../services/redux/store";
 import { useDispatch, useSelector } from "react-redux";
+// import Spinner from "./ui/Spinner";
 import {
   GET_SONGS,
   DELETE_SONG_BY_ID,
@@ -44,7 +45,6 @@ interface Song{
 const notify = () => toast("You have successfully deleted a song!");
 const SongTable = () => {
   const songs = useSelector((state: RootState) => state.songs);
-  // const s = useSelector((state: RootState) => state.song);
   console.log(songs);
   const dispatch = useDispatch();
   useEffect(() => {

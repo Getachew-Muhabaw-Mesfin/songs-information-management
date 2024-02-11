@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { useDispatch } from "react-redux";
@@ -34,6 +34,9 @@ const EditSongModal: React.FC<EditModalProps> = ({ show, onHide, song }) => {
     });
     onHide();
   };
+  useEffect(() => {
+    setEditedSong(song);
+  }, [song]);
 
   return (
     <Modal show={show} onHide={onHide} aria-labelledby="Edit Song">

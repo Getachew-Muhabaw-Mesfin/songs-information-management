@@ -65,7 +65,6 @@ export function* handleUpdateSong(action: {
     yield put(updateSongSlice(response.data));
     console.log("Testing Update song...", response.data);
   } catch (error) {
-    // Handle error
     console.error("Error updating song:", error);
   }
 }

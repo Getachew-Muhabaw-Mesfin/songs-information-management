@@ -26,11 +26,11 @@ const Form = () => {
     e.preventDefault();
     const newSong = {
       ...song,
-      id: song.id ? nanoid(8) : undefined, // Generate new ID only if it's not provided
+      _id: song._id ? nanoid(8) : undefined, // Generate new ID only if it's not provided
     };
     dispatch({ type: CREATE_SONG, payload: newSong });
     dispatch(
-      setSongSlice({ id: "", title: "", artist: "", album: "", genre: "" })
+      setSongSlice({ _id: "", title: "", artist: "", album: "", genre: "" })
     );
   };
 

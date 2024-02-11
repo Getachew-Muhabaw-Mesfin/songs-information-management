@@ -7,7 +7,7 @@ const createSong = async (req, res) => {
     const newSong = await Song.create({ title, artist, album, genre });
     res.status(201).json({
       status: "success",
-      newSong,
+      song:newSong,
     });
   } catch (error) {
     res.status(500).json({ status: "failed", error: error.message });
@@ -51,7 +51,7 @@ const updateSong = async (req, res) => {
     if (!updatedSong) {
       return res.status(404).json({ message: "Song not found" });
     }
-    res.json({ status: "success", updatedSong });
+    res.json({ status: "success", song: updatedSong});
   } catch (error) {
     res.status(500).json({ status: "failed", error: error.message });
   }

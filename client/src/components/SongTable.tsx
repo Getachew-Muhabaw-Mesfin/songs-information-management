@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import SongRow from "./SongRow";
-import { setSongSlice } from "../services/redux/slice/song";
+// import { setSongSlice } from "../services/redux/slice/song";
 import { useEffect } from "react";
 import { RootState } from "../services/redux/store";
 import { useDispatch, useSelector } from "react-redux";
@@ -61,7 +61,15 @@ const SongTable=() =>{
               onDelete={() =>
                 dispatch({ type: DELETE_SONG_BY_ID, _id: song._id })
               }
-              onEdit={() => dispatch(setSongSlice(song))}
+              onEdit={() =>
+                dispatch(
+                  // Ensure the dispatched action has the correct type and payload structure
+                  {
+                    type: UPDATE_SONG_BY_ID,
+                    payload: { _id: song._id, song: song },
+                  }
+                )
+              }
             />
           )
       )}

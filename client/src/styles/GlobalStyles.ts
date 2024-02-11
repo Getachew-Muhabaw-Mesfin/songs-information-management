@@ -80,7 +80,9 @@ body {
   line-height: 1.5;
   font-size: 1.6rem;
 }
-
+.form-control{
+  font-size: 1.8rem;
+}
 input,
 button,
 textarea,

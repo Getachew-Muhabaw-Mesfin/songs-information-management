@@ -7,11 +7,11 @@ function Dashboard() {
   return (
     <Row type="vertical">
       <Heading>
+        <Form />
         <p>
-          List of Songs <button >Add</button>
+          List of Songs 
         </p>
         <SongTable />
-        <Form />
       </Heading>
     </Row>
   );

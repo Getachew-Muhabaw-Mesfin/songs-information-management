@@ -5,7 +5,6 @@ import {
 } from "react-icons/hi2";
 import { IoStatsChart } from "react-icons/io5";
 import { GiMusicalScore } from "react-icons/gi";
-import { CgAlbum } from "react-icons/cg";
 
 const NavList = styled.ul`
   display: flex;
@@ -63,21 +62,15 @@ function MainNav() {
           </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="/albums">
-            <CgAlbum />
-            <span>Albums</span>
-          </StyledNavLink>
-        </li>
-        <li>
           <StyledNavLink to="/statistics">
             <IoStatsChart />
             <span>Statistics </span>
           </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="/settings">
+          <StyledNavLink to="/info">
             <HiOutlineCog6Tooth />
-            <span>Settings</span>
+            <span>Information</span>
           </StyledNavLink>
         </li>
       </NavList>

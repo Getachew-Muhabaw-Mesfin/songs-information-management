@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../services/redux/store";
 import { GET_STATISTICS } from "../services/redux/types";
 import Spinner from "../components/ui/Spinner";
-// import Row from "../ui/Row";
+
 
 const Statistics = () => {
   const dispatch = useDispatch();

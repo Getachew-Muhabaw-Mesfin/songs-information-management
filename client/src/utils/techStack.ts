@@ -10,9 +10,9 @@ const techStack = [
     tech: [
       "TypeScript",
       "React js",
-      "Redux-toolkit",
-      "Bootstrap",
+      "Redux Toolkit and saga",
       "Styled-Components",
+      "Bootstrap",
     ],
   },
   {

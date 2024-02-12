@@ -10,7 +10,7 @@ const techStack = [
     tech: [
       "TypeScript",
       "React js",
-      "Redux Toolkit and saga",
+      "Redux Toolkit and Redux-saga",
       "Styled-Components",
       "Bootstrap",
     ],
@@ -27,7 +27,7 @@ const techStack = [
     id: 3,
     catagory: "Development and Debugging  Tools",
     imgSrc: devTools,
-    color: "#C7D710",
+    color: "#C9A220",
     tech: [
       "Vite",
       "React Dev Tools",

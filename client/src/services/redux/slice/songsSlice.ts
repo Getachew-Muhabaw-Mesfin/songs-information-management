@@ -8,17 +8,19 @@ interface Song {
   genre: string;
 }
 
+const initialState: Song[] = [];
+
 interface SongsState extends Array<Song> {}
 
-const initialState: SongsState = [
-  {
-    _id: "",
-    title: "",
-    artist: "",
-    album: "",
-    genre: "",
-  },
-];
+// const initialStat: SongsState = [
+//   {
+//     _id: "",
+//     title: "",
+//     artist: "",
+//     album: "",
+//     genre: "",
+//   },
+// ];
 
 const songsSlice = createSlice({
   name: "songs",
@@ -28,9 +30,12 @@ const songsSlice = createSlice({
       state = action.payload;
       return state;
     },
+    // createSongSlice: (state, action: PayloadAction<Song>) => {
+    //   state.push(action.payload);
+    //   return state;
+    // },
     createSongSlice: (state, action: PayloadAction<Song>) => {
-      state.push(action.payload);
-      return state;
+      return [...state, action.payload]; 
     },
     updateSongSlice: (state, action: PayloadAction<Song>) => {
       // Find the index of the song with the matching _id

@@ -11,17 +11,6 @@ interface Song {
 const initialState: Song[] = [];
 
 interface SongsState extends Array<Song> {}
-
-// const initialStat: SongsState = [
-//   {
-//     _id: "",
-//     title: "",
-//     artist: "",
-//     album: "",
-//     genre: "",
-//   },
-// ];
-
 const songsSlice = createSlice({
   name: "songs",
   initialState,
@@ -30,10 +19,6 @@ const songsSlice = createSlice({
       state = action.payload;
       return state;
     },
-    // createSongSlice: (state, action: PayloadAction<Song>) => {
-    //   state.push(action.payload);
-    //   return state;
-    // },
     createSongSlice: (state, action: PayloadAction<Song>) => {
       return [...state, action.payload];
     },
@@ -44,18 +29,6 @@ const songsSlice = createSlice({
         state[index] = { ...updatedSong };
       }
     },
-
-    updateSong: (
-      state,
-      action: PayloadAction<{ _id: string; updatedSongData: Partial<Song> }>
-    ) => {
-      const { _id, updatedSongData } = action.payload;
-      const index = state.findIndex((song) => song._id === _id);
-      if (index !== -1) {
-        state[index] = { ...state[index], ...updatedSongData };
-      }
-    },
-
     deleteSongSlice: (state, action: PayloadAction<string>) => {
       return state.filter((song) => song._id !== action.payload);
     },
@@ -72,6 +45,5 @@ export const {
   updateSongSlice,
   deleteSongSlice,
   getStatistics,
-  updateSong,
 } = songsSlice.actions;
 export default songsSlice.reducer;

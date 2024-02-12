@@ -44,7 +44,9 @@ const SongTable = () => {
     },
     [dispatch]
   );
-
+ if (!Array.isArray(songs) || songs.length === 0) {
+   return null;
+ }
   return (
     <Table role="table">
       <TableHeader role="row">
@@ -57,9 +59,9 @@ const SongTable = () => {
       </TableHeader>
       {songs?.map(
         (song, index) =>
-          song._id && ( // Check if _id exists before rendering
+          song._id && ( 
             <SongRow
-              key={song._id} // Ensure a stable key for each SongRow
+              key={song._id} 
               song={song}
               number={index}
               onDelete={() => handleDelete(song._id)}

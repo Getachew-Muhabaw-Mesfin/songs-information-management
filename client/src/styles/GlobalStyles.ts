@@ -59,7 +59,7 @@ ul {
   list-style: none;
 }
 .card {
-  width: 35rem;
+  width: 30rem;
   box-shadow: 20px 20px 20px 20px rgba(36, 206, 200, 0.253) !important;
 }
 card-body {

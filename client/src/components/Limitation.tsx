@@ -6,10 +6,10 @@ const Limitation = () => {
         <ol>
           <li className="text-start">
             I am not using any caching, and synchronization techniques like
-            React Query, this lead some performance issue
+            React Query, this leads some performance issue
           </li>
           <li className="text-start">
-            I have one Model Called Songs and I has no any r/ship
+            I have one Model Called Song
           </li>
           <li></li>
           <li></li>

@@ -1,18 +1,12 @@
 import styled from "styled-components";
 import SongRow from "./SongRow";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { RootState } from "../services/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-// import Spinner from "./ui/Spinner";
-import {
-  GET_SONGS,
-  DELETE_SONG_BY_ID,
-} from "../services/redux/types/index";
-
+import { GET_SONGS, DELETE_SONG_BY_ID } from "../services/redux/types/index";
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);
-
   font-size: 1.4rem;
   background-color: var(--color-grey-0);
   border-radius: 7px;
@@ -24,7 +18,6 @@ const TableHeader = styled.header`
   grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
   column-gap: 2.4rem;
   align-items: center;
-
   background-color: var(--color-grey-50);
   border-bottom: 1px solid var(--color-grey-100);
   text-transform: uppercase;
@@ -36,17 +29,22 @@ const TableHeader = styled.header`
 
 const SongTable = () => {
   const songs = useSelector((state: RootState) => state.songs);
-  console.log(songs);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch({ type: GET_SONGS });
-  }, [songs,dispatch]);
-  if (!Array.isArray(songs)) {
-    return null;
-  }
-  const handleDelete = (id: string) => {
-    dispatch({ type: DELETE_SONG_BY_ID, _id: id });
-  };
+  }, [dispatch]);
+  useEffect(() => {
+    dispatch({ type: GET_SONGS });
+  });
+
+  const handleDelete = useCallback(
+    (id: string) => {
+      dispatch({ type: DELETE_SONG_BY_ID, _id: id });
+    },
+    [dispatch]
+  );
+
   return (
     <Table role="table">
       <TableHeader role="row">
@@ -61,10 +59,10 @@ const SongTable = () => {
         (song, index) =>
           song._id && ( // Check if _id exists before rendering
             <SongRow
-              key={song._id}
+              key={song._id} // Ensure a stable key for each SongRow
               song={song}
               number={index}
-              onDelete={() =>handleDelete(song._id)}
+              onDelete={() => handleDelete(song._id)}
             />
           )
       )}

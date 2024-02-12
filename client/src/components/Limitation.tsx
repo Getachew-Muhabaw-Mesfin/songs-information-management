@@ -5,9 +5,12 @@ const Limitation = () => {
       <div className="card-body">
         <ol>
           <li className="text-start">
-            I am not using any catching technique to handle data fetching
+            I am not using any caching, and synchronization techniques like
+            React Query, this lead some performance issue
           </li>
-          <li></li>
+          <li className="text-start">
+            I have one Model Called Songs and I has no any r/ship
+          </li>
           <li></li>
           <li></li>
           <li></li>

@@ -47,6 +47,7 @@ const SongTable = () => {
  if (!Array.isArray(songs) || songs.length === 0) {
    return null;
  }
+ 
   return (
     <Table role="table">
       <TableHeader role="row">

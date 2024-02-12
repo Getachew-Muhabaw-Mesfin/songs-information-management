@@ -1,7 +1,7 @@
 const Limitation = () => {
   return (
-    <div className="card text-center" style={{ width: "100%" }}>
-      <div className="card-header"> ⚠️Limitation of My Work 🧑‍💻</div>
+    <div className="card text-center border-4 " style={{ width: "100%" }}>
+      <div className="card-header text-bg-warning"> ⚠️Limitation of My Work 🧑‍💻</div>
       <div className="card-body">
         <ol className="lh-lg">
           <li className="text-start text-muted">
@@ -16,8 +16,9 @@ const Limitation = () => {
             (.gitingore) for ease of development
           </li>
           <li className="text-start text-muted">
-            I used Bootstrap Modal without your instruction for updating and
-            creating Songs
+            I used Bootstrap Modal(updating and creating Songs) Ante Design
+            Popup Component(Delete popup) and react Toast (Notify) without your
+            instruction
           </li>
           <li className="text-start text-muted">
             The site lacks responsiveness due to the absence of React UI

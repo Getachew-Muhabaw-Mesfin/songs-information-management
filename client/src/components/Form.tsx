@@ -31,6 +31,7 @@ function Form() {
     };
     dispatch({ type: CREATE_SONG, payload: newSong });
     setLgShow(false);
+    setSong({ _id: "", title: "", artist: "", album: "", genre: "" });
   };
 
   return (

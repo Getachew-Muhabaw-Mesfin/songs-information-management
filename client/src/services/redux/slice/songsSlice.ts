@@ -35,16 +35,27 @@ const songsSlice = createSlice({
     //   return state;
     // },
     createSongSlice: (state, action: PayloadAction<Song>) => {
-      return [...state, action.payload]; 
+      return [...state, action.payload];
     },
     updateSongSlice: (state, action: PayloadAction<Song>) => {
-      // Find the index of the song with the matching _id
-      const index = state.findIndex((i) => i._id === action.payload._id);
-      // If the song is found, replace it with the updated song, otherwise return the original state
+      const updatedSong = action.payload;
+      const index = state.findIndex((song) => song._id === updatedSong._id);
       if (index !== -1) {
-        state[index] = action.payload;
+        state[index] = { ...updatedSong };
       }
     },
+
+    updateSong: (
+      state,
+      action: PayloadAction<{ _id: string; updatedSongData: Partial<Song> }>
+    ) => {
+      const { _id, updatedSongData } = action.payload;
+      const index = state.findIndex((song) => song._id === _id);
+      if (index !== -1) {
+        state[index] = { ...state[index], ...updatedSongData };
+      }
+    },
+
     deleteSongSlice: (state, action: PayloadAction<string>) => {
       return state.filter((song) => song._id !== action.payload);
     },
@@ -61,5 +72,6 @@ export const {
   updateSongSlice,
   deleteSongSlice,
   getStatistics,
+  updateSong,
 } = songsSlice.actions;
 export default songsSlice.reducer;

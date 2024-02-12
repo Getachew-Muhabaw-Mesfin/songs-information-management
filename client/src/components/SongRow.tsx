@@ -1,7 +1,10 @@
 import styled from "styled-components";
-import { HiPencil,  HiTrash } from "react-icons/hi2";
-import EditSongModal from "./EditSongModal";
+import { HiPencil, HiTrash } from "react-icons/hi";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Modal, Button, Form } from "react-bootstrap";
+import { UPDATE_SONG_BY_ID } from "../services/redux/types";
+
 const TableRow = styled.div`
   display: grid;
   grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
@@ -31,6 +34,7 @@ const Album = styled.div`
   font-weight: 500;
   color: var(--color-green-700);
 `;
+
 interface Song {
   _id: string;
   title: string;
@@ -38,30 +42,38 @@ interface Song {
   album: string;
   genre: string;
 }
-
 interface SongRowProps {
   song: Song;
   number: number;
-  onDelete: () => void; 
-  onEdit: () => void; 
+  onDelete: () => void;
 }
-const SongRow: React.FC<SongRowProps> = ({
-  song,
-  number,
-  onDelete,
-}) => {
-   const [showModal, setShowModal] = useState(false);
 
-   const handleEdit = () => {
-     setShowModal(true);
-   };
-
-   const handleCloseModal = () => {
-     setShowModal(false);
-   };
+const SongRow: React.FC<SongRowProps> = ({ song, number, onDelete }) => {
   const { title, artist, album, genre } = song;
+  const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(false);
+  const [updatedSong, setUpdatedSong] = useState({ ...song });
 
- 
+  const handleEdit = () => {
+    setShowModal(true);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUpdatedSong((prevSong) => ({
+      ...prevSong,
+      [name]: value,
+    }));
+  };
+
+  const handleUpdate = () => {
+     dispatch({
+       type: UPDATE_SONG_BY_ID,
+       payload: { _id: updatedSong._id, song: updatedSong },
+     });
+    setShowModal(false);
+  };
+
   return (
     <>
       <TableRow role="row">
@@ -80,13 +92,64 @@ const SongRow: React.FC<SongRowProps> = ({
           </button>
         </div>
       </TableRow>
-      <EditSongModal
-        song={song}
-        show={showModal}
-        onHide={handleCloseModal}
-      />
+
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Song</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="title">
+              <Form.Label>Title:</Form.Label>
+              <Form.Control
+                type="text"
+                name="title"
+                value={updatedSong.title}
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="artist">
+              <Form.Label>Artist:</Form.Label>
+              <Form.Control
+                type="text"
+                name="artist"
+                value={updatedSong.artist}
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="album">
+              <Form.Label>Album:</Form.Label>
+              <Form.Control
+                type="text"
+                name="album"
+                value={updatedSong.album}
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="genre">
+              <Form.Label>Genre:</Form.Label>
+              <Form.Control
+                type="text"
+                name="genre"
+                value={updatedSong.genre}
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleUpdate}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };
 
 export default SongRow;
+
+

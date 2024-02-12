@@ -10,7 +10,7 @@ import {
   DELETE_SONG_BY_ID,
   UPDATE_SONG_BY_ID,
 } from "../services/redux/types/index";
-import toast from "react-hot-toast";
+
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);
@@ -42,7 +42,7 @@ interface Song{
   album: string;
   genre: string;
 }
-const notify = () => toast("You have successfully deleted a song!");
+
 const SongTable = () => {
   const songs = useSelector((state: RootState) => state.songs);
   console.log(songs);
@@ -55,7 +55,6 @@ const SongTable = () => {
   }
   const handleDelete = (id: string) => {
     dispatch({ type: DELETE_SONG_BY_ID, _id: id });
-    notify();
   };
   const handleEdit = (_id: string, song: Song) => {
     dispatch({

@@ -74,11 +74,16 @@ html {
 body {
   font-family: "Poppins", sans-serif;
   color: var(--color-grey-700);
-
   transition: color 0.3s, background-color 0.3s;
   min-height: 100vh;
   line-height: 1.5;
   font-size: 1.6rem;
+  background: radial-gradient(
+    circle,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 0%,
+    rgba(0, 212, 255, 1) 100%
+  );
 }
 .form-control{
   font-size: 1.8rem;
@@ -138,12 +143,29 @@ h6 {
   hyphens: auto;
 }
 
-img {
-  max-width: 100%;
-
-  /* For dark mode */
-  filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity));
+.card {
+  width: 35rem;
 }
+.card:hover {
+  box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.253) !important;
+}
+card-body {
+  padding: 3rem 0 !important;
+}
+.card-text {
+  padding: 0.4rem 1.9rem;
+}
+.overflow {
+  overflow: hidden;
+}
+.card-img-top {
+  transform: scale(1.1);
+  transition: transform 0.5s ease;
+}
+.card-img-top:hover {
+  transform: scale(1.8);
+}
+
 
 `;
 

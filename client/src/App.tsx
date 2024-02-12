@@ -3,7 +3,7 @@ import GlobalStyles from "./styles/GlobalStyles";
 import AppLayout from "./components/ui/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import Statistics from "./pages/Statistics";
-import Settings from "./pages/Settings";
+import Settings from "./pages/Information";
 
 
 function App() {

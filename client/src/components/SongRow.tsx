@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import { HiPencil, HiTrash } from "react-icons/hi";
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Modal, Button, Form } from "react-bootstrap";
@@ -84,11 +86,11 @@ const SongRow: React.FC<SongRowProps> = ({ song, number, onDelete }) => {
         <RowData role="cell">{genre}</RowData>
 
         <div>
-          <button onClick={handleEdit} style={{ marginRight: "1rem" }}>
-            <HiPencil />
+          <button onClick={handleEdit}  className="btn">
+            <FaEdit style={{ color: "blue" }} size={20} />
           </button>
-          <button onClick={onDelete}>
-            <HiTrash style={{ color: "red" }} />
+          <button onClick={onDelete} className="btn">
+            <MdDelete style={{ color: "red" }} size={20} />
           </button>
         </div>
       </TableRow>

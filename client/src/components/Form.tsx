@@ -38,7 +38,7 @@ function Form() {
     <>
       <Button
         onClick={() => setLgShow(true)}
-        className="btn btn-bg-primary btn-lg mt-2 float-end"
+        className="btn btn-bg-success btn-lg mt-2 float-end"
       >
         <IoMdAddCircleOutline size={15} /> Add Song
       </Button>

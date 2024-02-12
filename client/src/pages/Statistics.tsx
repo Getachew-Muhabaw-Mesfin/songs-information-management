@@ -15,7 +15,7 @@ const Statistics = () => {
   useEffect(() => {
     dispatch({ type: GET_STATISTICS });
   }, [dispatch]);
-  console.log(totalSongs, totalArtists, totalAlbums, totalGenres);
+
   return (
     <div>
       <Heading>Statistics</Heading>

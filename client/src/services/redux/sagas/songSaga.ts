@@ -48,7 +48,6 @@ export function* handleCreateSong(action: { type: string; payload: Song }) {
       action.payload
     );
     yield put(createSongSlice(response.data));
-    console.log("Testing Create song...", response.data);
   } catch (error) {
     console.error("Error creating song:", error);
   }
@@ -63,7 +62,6 @@ export function* handleUpdateSong(action: {
     const { _id, song } = action.payload;
     const response: AxiosResponse<Song> = yield call(updateSongAPI, _id, song);
     yield put(updateSongSlice(response.data));
-    console.log("Testing Update song...", response.data);
   } catch (error) {
     console.error("Error updating song:", error);
   }
@@ -78,7 +76,6 @@ export function* deleteSongByIdSaga(action: DeleteSongAction) {
   try {
     yield call(deleteSongAPI, action._id);
     yield put(deleteSongSlice(action._id));
-    console.log(action._id, "Testing Delete song...")
   } catch (error) {
     console.error("Error deleting song:", error);
   }

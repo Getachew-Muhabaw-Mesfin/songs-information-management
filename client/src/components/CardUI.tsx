@@ -17,7 +17,7 @@ const CardUI:React.FC<CardUIProps>=({ catagory, imgSrc, color, tech })=> {
         />
       </div>
       <div className="card-body text-dark">
-        <h4 className="card-title text-bold h2" style={{ color: `${color}` }}>
+        <h4 className="card-title text-bold h4" style={{ color: `${color}` }}>
           {catagory}
         </h4>
         <ul className="list-group list-group-flush text-start">

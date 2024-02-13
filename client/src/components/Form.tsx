@@ -2,9 +2,10 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import React from "react";
+import { toast } from "react-toastify";
 import { IoMdAddCircleOutline } from "react-icons/io";
-import {  useDispatch } from "react-redux";
-import {CREATE_SONG} from '../services/redux/types/index'
+import { useDispatch } from "react-redux";
+import { CREATE_SONG } from "../services/redux/types/index";
 import { nanoid } from "@reduxjs/toolkit";
 
 function Form() {
@@ -32,13 +33,14 @@ function Form() {
     dispatch({ type: CREATE_SONG, payload: newSong });
     setLgShow(false);
     setSong({ _id: "", title: "", artist: "", album: "", genre: "" });
+    toast.success("Song successfully added");
   };
 
   return (
     <>
       <Button
         onClick={() => setLgShow(true)}
-        className="btn btn-bg-primary btn-lg mt-2 float-end"
+        className="btn btn-bg-success btn-lg mt-2 float-end"
       >
         <IoMdAddCircleOutline size={15} /> Add Song
       </Button>
@@ -66,7 +68,7 @@ function Form() {
                 name="title"
                 value={song.title}
                 onChange={handleChange}
-                placeholder="Enter song Title"
+                required
               />
             </div>
             <div className="col-md-6">
@@ -78,7 +80,7 @@ function Form() {
                 className="form-control"
                 id="artist"
                 name="artist"
-                placeholder="Enter Artist name"
+                required
                 value={song.artist}
                 onChange={handleChange}
               />
@@ -92,7 +94,7 @@ function Form() {
                 className="form-control"
                 id="album"
                 name="album"
-                placeholder="Enter Album name"
+                required
                 value={song.album}
                 onChange={handleChange}
               />
@@ -106,7 +108,7 @@ function Form() {
                 className="form-control"
                 id="genre"
                 name="genre"
-                placeholder="Enter Genre"
+                required
                 value={song.genre}
                 onChange={handleChange}
               />

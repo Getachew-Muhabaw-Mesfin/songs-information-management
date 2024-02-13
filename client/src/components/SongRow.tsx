@@ -1,5 +1,8 @@
 import styled from "styled-components";
-import { HiPencil, HiTrash } from "react-icons/hi";
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import { Popconfirm } from "antd";
+import { toast } from "react-toastify";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Modal, Button, Form } from "react-bootstrap";
@@ -49,10 +52,10 @@ interface SongRowProps {
 }
 
 const SongRow: React.FC<SongRowProps> = ({ song, number, onDelete }) => {
-  const { title, artist, album, genre } = song;
-  const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [updatedSong, setUpdatedSong] = useState({ ...song });
+  const { title, artist, album, genre } = song;
+  const dispatch = useDispatch();
 
   const handleEdit = () => {
     setShowModal(true);
@@ -67,11 +70,16 @@ const SongRow: React.FC<SongRowProps> = ({ song, number, onDelete }) => {
   };
 
   const handleUpdate = () => {
-     dispatch({
-       type: UPDATE_SONG_BY_ID,
-       payload: { _id: updatedSong._id, song: updatedSong },
-     });
+    dispatch({
+      type: UPDATE_SONG_BY_ID,
+      payload: { _id: updatedSong._id, song: updatedSong },
+    });
     setShowModal(false);
+    toast.success("Song successfully updated");
+  };
+  const handleDelete = () => {
+    onDelete();
+    toast.success("Song successfully deleted");
   };
 
   return (
@@ -84,12 +92,19 @@ const SongRow: React.FC<SongRowProps> = ({ song, number, onDelete }) => {
         <RowData role="cell">{genre}</RowData>
 
         <div>
-          <button onClick={handleEdit} style={{ marginRight: "1rem" }}>
-            <HiPencil />
+          <button onClick={handleEdit} className="btn">
+            <FaEdit style={{ color: "blue" }} size={20} />
           </button>
-          <button onClick={onDelete}>
-            <HiTrash style={{ color: "red" }} />
-          </button>
+          <Popconfirm
+            title={`Are you sure to delete this Song (${title}) ?`}
+            onConfirm={handleDelete}
+            okText="Yes"
+            cancelText="No"
+          >
+            <button className="btn">
+              <MdDelete style={{ color: "red" }} size={20} />
+            </button>
+          </Popconfirm>
         </div>
       </TableRow>
 
@@ -99,42 +114,55 @@ const SongRow: React.FC<SongRowProps> = ({ song, number, onDelete }) => {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group controlId="title">
-              <Form.Label>Title:</Form.Label>
-              <Form.Control
-                type="text"
-                name="title"
-                value={updatedSong.title}
-                onChange={handleChange}
-              />
-            </Form.Group>
-            <Form.Group controlId="artist">
-              <Form.Label>Artist:</Form.Label>
-              <Form.Control
-                type="text"
-                name="artist"
-                value={updatedSong.artist}
-                onChange={handleChange}
-              />
-            </Form.Group>
-            <Form.Group controlId="album">
-              <Form.Label>Album:</Form.Label>
-              <Form.Control
-                type="text"
-                name="album"
-                value={updatedSong.album}
-                onChange={handleChange}
-              />
-            </Form.Group>
-            <Form.Group controlId="genre">
-              <Form.Label>Genre:</Form.Label>
-              <Form.Control
-                type="text"
-                name="genre"
-                value={updatedSong.genre}
-                onChange={handleChange}
-              />
-            </Form.Group>
+            <div className="row">
+              <div className="col-md-6">
+                <Form.Group controlId="title">
+                  <Form.Label>Title:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="title"
+                    value={updatedSong.title}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+              </div>
+
+              <div className="col-md-6">
+                <Form.Group controlId="artist">
+                  <Form.Label>Artist:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="artist"
+                    value={updatedSong.artist}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-6">
+                <Form.Group controlId="album">
+                  <Form.Label>Album:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="album"
+                    value={updatedSong.album}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+              </div>
+              <div className="col-md-6">
+                <Form.Group controlId="genre">
+                  <Form.Label>Genre:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="genre"
+                    value={updatedSong.genre}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+              </div>
+            </div>
           </Form>
         </Modal.Body>
         <Modal.Footer>
@@ -151,5 +179,3 @@ const SongRow: React.FC<SongRowProps> = ({ song, number, onDelete }) => {
 };
 
 export default SongRow;
-
-

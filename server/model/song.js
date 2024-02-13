@@ -4,19 +4,20 @@ const songSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: [true, "Please Enter title of song"],
+      required: [true, "Please enter the title of the song"],
     },
     artist: {
       type: String,
-      required: [true, "Please Enter artist of song"],
+      required: [true, "Please enter the artist of the song"],
     },
     album: {
       type: String,
-      required: [true, "Please Enter album of song"],
+      required: [true, "Please enter the album of the song"],
     },
     genre: {
-      type: String,
-      required: [true, "Please Enter genre of song"],
+      type: [String],
+      enum: ["Country", "Love", "Classical", "Reggae", "Jazz"],
+      required: [true, "Please select the genre of the song"],
     },
   },
   {

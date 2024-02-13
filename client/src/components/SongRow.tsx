@@ -60,14 +60,6 @@ const SongRow: React.FC<SongRowProps> = ({ song, number, onDelete }) => {
   const handleEdit = () => {
     setShowModal(true);
   };
-
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target;
-  //   setUpdatedSong((prevSong) => ({
-  //     ...prevSong,
-  //     [name]: value,
-  //   }));
-  // };
   const handleChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>

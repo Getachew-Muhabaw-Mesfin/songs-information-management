@@ -61,12 +61,20 @@ const SongRow: React.FC<SongRowProps> = ({ song, number, onDelete }) => {
     setShowModal(true);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //   setUpdatedSong((prevSong) => ({
+  //     ...prevSong,
+  //     [name]: value,
+  //   }));
+  // };
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    setUpdatedSong((prevSong) => ({
-      ...prevSong,
-      [name]: value,
-    }));
+    setUpdatedSong((prevSong) => ({ ...prevSong, [name]: value }));
   };
 
   const handleUpdate = () => {
@@ -122,11 +130,12 @@ const SongRow: React.FC<SongRowProps> = ({ song, number, onDelete }) => {
                     type="text"
                     name="title"
                     value={updatedSong.title}
-                    onChange={handleChange}
+                    onChange={
+                      handleChange as React.ChangeEventHandler<HTMLInputElement>
+                    }
                   />
                 </Form.Group>
               </div>
-
               <div className="col-md-6">
                 <Form.Group controlId="artist">
                   <Form.Label>Artist:</Form.Label>
@@ -134,7 +143,9 @@ const SongRow: React.FC<SongRowProps> = ({ song, number, onDelete }) => {
                     type="text"
                     name="artist"
                     value={updatedSong.artist}
-                    onChange={handleChange}
+                    onChange={
+                      handleChange as React.ChangeEventHandler<HTMLInputElement>
+                    }
                   />
                 </Form.Group>
               </div>
@@ -147,19 +158,30 @@ const SongRow: React.FC<SongRowProps> = ({ song, number, onDelete }) => {
                     type="text"
                     name="album"
                     value={updatedSong.album}
-                    onChange={handleChange}
+                    onChange={
+                      handleChange as React.ChangeEventHandler<HTMLInputElement>
+                    }
                   />
                 </Form.Group>
               </div>
               <div className="col-md-6">
                 <Form.Group controlId="genre">
                   <Form.Label>Genre:</Form.Label>
-                  <Form.Control
-                    type="text"
+                  <select
+                    className="form-select"
                     name="genre"
                     value={updatedSong.genre}
-                    onChange={handleChange}
-                  />
+                    onChange={
+                      handleChange as React.ChangeEventHandler<HTMLSelectElement>
+                    }
+                  >
+                    <option value="">Select Genre</option>
+                    <option value="Country">Country</option>
+                    <option value="Love">Love</option>
+                    <option value="Classical">Classical</option>
+                    <option value="Reggae">Reggae</option>
+                    <option value="Jazz">Jazz</option>
+                  </select>
                 </Form.Group>
               </div>
             </div>

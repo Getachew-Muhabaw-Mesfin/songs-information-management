@@ -50,6 +50,9 @@ body {
 .form-control{
   font-size: 1.8rem;
 }
+.form-select{
+  font-size: 1.8rem;
+}
 a {
   color: inherit;
   text-decoration: none;

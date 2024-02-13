@@ -1,16 +1,24 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import React from "react";
+import React, { ChangeEvent, FormEvent } from "react";
 import { toast } from "react-toastify";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { CREATE_SONG } from "../services/redux/types/index";
 import { nanoid } from "@reduxjs/toolkit";
 
-function Form() {
+interface Song {
+  _id: string;
+  title: string;
+  artist: string;
+  album: string;
+  genre: string;
+}
+
+const Form: React.FC = () => {
   const [lgShow, setLgShow] = useState(false);
-  const [song, setSong] = useState({
+  const [song, setSong] = useState<Song>({
     _id: "",
     title: "",
     artist: "",
@@ -19,16 +27,18 @@ function Form() {
   });
   const dispatch = useDispatch();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setSong((prevSong) => ({ ...prevSong, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const newSong = {
+    const newSong: Song = {
       ...song,
-      _id: nanoid(8), // Generate new _id using nanoid
+      _id: nanoid(8),
     };
     dispatch({ type: CREATE_SONG, payload: newSong });
     setLgShow(false);
@@ -103,15 +113,21 @@ function Form() {
               <label htmlFor="genre" className="form-label">
                 Genre
               </label>
-              <input
-                type="text"
-                className="form-control"
+              <select
+                className="form-select"
                 id="genre"
                 name="genre"
                 required
                 value={song.genre}
                 onChange={handleChange}
-              />
+              >
+                <option value="">----select Genre----</option>
+                <option value="Country">Country</option>
+                <option value="Love">Love</option>
+                <option value="Classical">Classical</option>
+                <option value="Reggae">Reggae</option>
+                <option value="Jazz">Jazz</option>
+              </select>
             </div>
             <div className="col-12">
               <Button
@@ -126,49 +142,54 @@ function Form() {
       </Modal>
     </>
   );
-}
+};
 
 export default Form;
 
+/******** Stable Version of roms */
 // import { useState } from "react";
 // import Button from "react-bootstrap/Button";
 // import Modal from "react-bootstrap/Modal";
 // import React from "react";
+// import { toast } from "react-toastify";
 // import { IoMdAddCircleOutline } from "react-icons/io";
-// import { useSelector, useDispatch } from "react-redux";
-// import { RootState } from "../services/redux/store";
-// import { setSongSlice } from "../services/redux/slice/song";
-// import { nanoid } from "@reduxjs/toolkit";
+// import { useDispatch } from "react-redux";
 // import { CREATE_SONG } from "../services/redux/types/index";
+// import { nanoid } from "@reduxjs/toolkit";
 
 // function Form() {
 //   const [lgShow, setLgShow] = useState(false);
-//   const song = useSelector((state: RootState) => state.song);
+//   const [song, setSong] = useState({
+//     _id: "",
+//     title: "",
+//     artist: "",
+//     album: "",
+//     genre: "",
+//   });
 //   const dispatch = useDispatch();
 
 //   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 //     const { name, value } = e.target;
-//     dispatch(setSongSlice({ ...song, [name]: value }));
+//     setSong((prevSong) => ({ ...prevSong, [name]: value }));
 //   };
 
 //   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 //     e.preventDefault();
 //     const newSong = {
 //       ...song,
-//       _id: song._id ? nanoid(8) : undefined,
+//       _id: nanoid(8), // Generate new _id using nanoid
 //     };
 //     dispatch({ type: CREATE_SONG, payload: newSong });
-//     dispatch(
-//       setSongSlice({ _id: "", title: "", artist: "", album: "", genre: "" })
-//     );
 //     setLgShow(false);
+//     setSong({ _id: "", title: "", artist: "", album: "", genre: "" });
+//     toast.success("Song successfully added");
 //   };
 
 //   return (
 //     <>
 //       <Button
 //         onClick={() => setLgShow(true)}
-//         className="btn btn-bg-primary btn-lg mt-2 float-end"
+//         className="btn btn-bg-success btn-lg mt-2 float-end"
 //       >
 //         <IoMdAddCircleOutline size={15} /> Add Song
 //       </Button>
@@ -196,7 +217,7 @@ export default Form;
 //                 name="title"
 //                 value={song.title}
 //                 onChange={handleChange}
-//                 placeholder="Enter song Title"
+//                 required
 //               />
 //             </div>
 //             <div className="col-md-6">
@@ -208,7 +229,7 @@ export default Form;
 //                 className="form-control"
 //                 id="artist"
 //                 name="artist"
-//                 placeholder="Enter Artist name"
+//                 required
 //                 value={song.artist}
 //                 onChange={handleChange}
 //               />
@@ -222,7 +243,7 @@ export default Form;
 //                 className="form-control"
 //                 id="album"
 //                 name="album"
-//                 placeholder="Enter Album name"
+//                 required
 //                 value={song.album}
 //                 onChange={handleChange}
 //               />
@@ -236,7 +257,7 @@ export default Form;
 //                 className="form-control"
 //                 id="genre"
 //                 name="genre"
-//                 placeholder="Enter Genre"
+//                 required
 //                 value={song.genre}
 //                 onChange={handleChange}
 //               />

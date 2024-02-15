@@ -4,17 +4,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../services/redux/store";
 import { GET_STATISTICS } from "../services/redux/types";
 import Spinner from "../components/ui/Spinner";
-
+import { Bar } from "react-chartjs-2";
+import { CategoryScale, Chart } from "chart.js/auto";
+Chart.register(CategoryScale);
 
 const Statistics = () => {
   const dispatch = useDispatch();
-  const { totalSongs, totalArtists, totalAlbums, totalGenres } = useSelector(
-    (state: RootState) => state.songs
-  );
+  const { totalSongs, totalArtists, totalAlbums, totalGenres, songsInGenre } =
+    useSelector((state: RootState) => state.songs);
 
   useEffect(() => {
     dispatch({ type: GET_STATISTICS });
   }, [dispatch]);
+
+  console.log(songsInGenre);
+  const barData = {
+    labels: ["Total Songs", "Total Artists", "Total Albums", "Total Genres"],
+    datasets: [
+      {
+        label: "Statistics",
+        data: [totalSongs, totalArtists, totalAlbums, totalGenres],
+      },
+    ],
+  };
 
   return (
     <div>
@@ -29,10 +41,12 @@ const Statistics = () => {
               <h3>Total Artists: {totalArtists}</h3>
               <h3>Total Albums: {totalAlbums}</h3>
               <h3>Total Genres: {totalGenres}</h3>
+              <Bar data={barData} />
             </div>
           </div>
         )}
       </div>
+      <div></div>
     </div>
   );
 };

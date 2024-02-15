@@ -5,11 +5,13 @@ exports.getOverallStatistics = async (req, res) => {
     const totalSongs = await Song.countDocuments();
     const totalArtists = await Song.distinct("artist").count();
     const totalAlbums = await Song.distinct("album").count();
-    const totalGenres = await Song.distinct("genre").count();
-
-    const songsInGenre = await Song.aggregate([
-      { $group: { _id: "$genre", count: { $sum: 1 } } },
-    ]);
+    const genres = ["Country", "Love", "Classical", "Reggae", "Jazz"];
+    const totalGenres = genres.length;
+    const songsInGenre = {};
+    for (const genre of genres) {
+      const count = await Song.countDocuments({ genre: genre });
+      songsInGenre[genre] = count;
+    }
 
     const songsPerArtist = await Song.aggregate([
       { $group: { _id: "$artist", count: { $sum: 1 } } },

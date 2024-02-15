@@ -17,7 +17,8 @@ interface SongData {
   genre: string;
 }
 
-axios.defaults.baseURL = "http://127.0.0.1:3000/api/v1";
+axios.defaults.baseURL = "https://sonf-info.onrender.com/api/v1/";
+// axios.defaults.baseURL = "http://127.0.0.1:3000/api/v1";
 
 // Define API functions with TypeScript types
 export const createSongAPI = async (

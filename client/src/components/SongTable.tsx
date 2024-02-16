@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import SongRow from "./SongRow";
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useCallback } from "react";
 import { RootState } from "../services/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_SONGS, DELETE_SONG_BY_ID } from "../services/redux/types/index";
-import Search from "./ui/SearchBar";
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);
@@ -29,13 +28,15 @@ const TableHeader = styled.header`
 `;
 
 const SongTable = () => {
-  const [searchTerm, setSearchTerm] = useState("");
   const songs = useSelector((state: RootState) => state.songs);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({ type: GET_SONGS });
   }, [dispatch]);
+  useEffect(() => {
+    dispatch({ type: GET_SONGS });
+  });
 
   const handleDelete = useCallback(
     (id: string) => {
@@ -43,22 +44,12 @@ const SongTable = () => {
     },
     [dispatch]
   );
-
-  if (!Array.isArray(songs) || songs.length === 0) {
-    return null;
-  }
-
-  const filteredSongs = songs.filter((song) =>
-    Object.values(song).some(
-      (value) =>
-        typeof value === "string" &&
-        value.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-  );
-
+ if (!Array.isArray(songs) || songs.length === 0) {
+   return null;
+ }
+ 
   return (
     <Table role="table">
-      <Search setSearchTerm={setSearchTerm} />
       <TableHeader role="row">
         <div>#</div>
         <div>Title</div>
@@ -67,14 +58,17 @@ const SongTable = () => {
         <div>Genre</div>
         <div>Actions</div>
       </TableHeader>
-      {filteredSongs.map((song, index) => (
-        <SongRow
-          key={song._id}
-          song={song}
-          number={index}
-          onDelete={() => handleDelete(song._id)}
-        />
-      ))}
+      {songs?.map(
+        (song, index) =>
+          song._id && ( 
+            <SongRow
+              key={song._id} 
+              song={song}
+              number={index}
+              onDelete={() => handleDelete(song._id)}
+            />
+          )
+      )}
     </Table>
   );
 };

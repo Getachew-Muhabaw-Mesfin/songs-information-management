@@ -48,7 +48,7 @@ const Statistics = () => {
     ],
   };
 
-  const pieData: PieData | null = songsInGenre
+  const genreData: PieData | null = songsInGenre
     ? {
         labels: Object.keys(songsInGenre),
         datasets: [
@@ -74,14 +74,11 @@ const Statistics = () => {
         <div className="col-md-6">
           {totalSongs === undefined ? <Spinner /> : <Bar data={barData} />}
         </div>
-        <div className="col-md-6">
-          {pieData && (
-            <>
-              <Heading>Songs in Genre</Heading>
-              <Pie data={pieData} />
-            </>
-          )}
-        </div>
+        <div className="col-md-6">{genreData && <Bar data={genreData} />}</div>
+      </div>
+      <br />
+      <div style={{ width: "400px", margin: "0 auto", textAlign: "center" }}>
+        {genreData && <Pie data={genreData} width={300} height={300} />}
       </div>
     </div>
   );

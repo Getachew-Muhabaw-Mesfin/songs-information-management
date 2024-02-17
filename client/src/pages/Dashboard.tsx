@@ -8,9 +8,7 @@ function Dashboard() {
     <Row type="vertical">
       <Heading>
         <Form />
-        <p>
-          List of Songs 
-        </p>
+        <p>List of Songs</p>
         <SongTable />
       </Heading>
     </Row>

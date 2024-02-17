@@ -86,7 +86,11 @@ const Statistics = () => {
         <div className="col-md-6">{genreData && <Bar data={genreData} />}</div>
         <div
           className="col-md-6"
-          style={{ display: "flex", justifyContent: "center", alignItems: "center"}}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
           <ol
             style={{
@@ -148,3 +152,5 @@ const Statistics = () => {
 };
 
 export default Statistics;
+
+

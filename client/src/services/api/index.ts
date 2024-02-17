@@ -9,7 +9,6 @@ interface Song {
   genre: string;
 }
 
-// Define interfaces for request data
 interface SongData {
   title: string;
   artist: string;
@@ -17,10 +16,9 @@ interface SongData {
   genre: string;
 }
 
-// axios.defaults.baseURL = "https://sonf-info.onrender.com/api/v1/";
-axios.defaults.baseURL = "http://127.0.0.1:3000/api/v1";
+axios.defaults.baseURL = "https://sonf-info.onrender.com/api/v1/";
+// axios.defaults.baseURL = "http://127.0.0.1:3000/api/v1";
 
-// Define API functions with TypeScript types
 export const createSongAPI = async (
   song: SongData
 ): Promise<AxiosResponse<Song>> => axios.post("/songs", song);

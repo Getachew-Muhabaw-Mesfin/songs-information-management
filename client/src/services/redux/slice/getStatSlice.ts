@@ -20,12 +20,13 @@ const statisticsSlice = createSlice({
   name: "statistics",
   initialState,
   reducers: {
-    setStatistics: (state, action: PayloadAction<StatisticsState>) => {
-      return { ...state, ...action.payload };
+    getStatistics: (state, action: PayloadAction<StatisticsState>) => {
+      state = action.payload;
+      return state;
     },
   },
 });
 
-export const { setStatistics } = statisticsSlice.actions;
+export const { getStatistics } = statisticsSlice.actions;
 
 export default statisticsSlice.reducer;

@@ -11,9 +11,10 @@ import {
   createSongSlice,
   updateSongSlice,
   deleteSongSlice,
-  getStatistics
+  
 } from "../slice/songsSlice";
 
+import {getStatistics} from "../slice/getStatSlice";
 import {
   GET_SONGS,
   CREATE_SONG,
@@ -29,6 +30,14 @@ interface Song {
   album: string;
   genre: string;
 }
+interface StatisticsState {
+  totalSongs: number;
+  totalArtists: number;
+  totalAlbums: number;
+  totalGenres: number;
+  songsInGenre: { [key: string]: number };
+}
+
 
 export function* getSongsSaga() {
   try {
@@ -83,7 +92,7 @@ export function* deleteSongByIdSaga(action: DeleteSongAction) {
 
 export function* getStatisticsSaga() {
   try {
-    const statistics: AxiosResponse<Song[]> = yield call(getStatisticsAPI);
+    const statistics: AxiosResponse<StatisticsState> = yield call(getStatisticsAPI);
     yield put(getStatistics(statistics.data));
   } catch (error) {
     console.error("Error fetching statistics:", error);

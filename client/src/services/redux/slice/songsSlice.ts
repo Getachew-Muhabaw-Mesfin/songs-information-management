@@ -32,10 +32,6 @@ const songsSlice = createSlice({
     deleteSongSlice: (state, action: PayloadAction<string>) => {
       return state.filter((song) => song._id !== action.payload);
     },
-    getStatistics: (state, action: PayloadAction<SongsState>) => {
-      state = action.payload;
-      return state;
-    },
   },
 });
 
@@ -44,6 +40,5 @@ export const {
   createSongSlice,
   updateSongSlice,
   deleteSongSlice,
-  getStatistics,
 } = songsSlice.actions;
 export default songsSlice.reducer;

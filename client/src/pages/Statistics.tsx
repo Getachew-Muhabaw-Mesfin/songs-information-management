@@ -27,11 +27,18 @@ interface PieData {
     backgroundColor: string[];
   }[];
 }
+interface StatisticsState {
+  totalSongs: number;
+  totalArtists: number;
+  totalAlbums: number;
+  totalGenres: number;
+  songsInGenre: { [key: string]: number } | null;
+}
 
 const Statistics = () => {
   const dispatch = useDispatch();
   const { totalSongs, totalArtists, totalAlbums, totalGenres, songsInGenre } =
-    useSelector((state: RootState) => state.songs);
+    useSelector((state: RootState) => state.songs) as StatisticsState;
 
   useEffect(() => {
     dispatch({ type: GET_STATISTICS });

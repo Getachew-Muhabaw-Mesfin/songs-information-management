@@ -57,11 +57,11 @@ const Statistics = () => {
             label: "Songs in Genre",
             data: Object.values(songsInGenre),
             backgroundColor: [
-              "#24CEC8",
-              "#C7D710",
-              "#2174C9",
-              "#FA8937",
               "#FF6384",
+              "#36A2EB",
+              "#FFCE56",
+              "#4BC0C0",
+              "#9966FF",
             ],
           },
         ],
@@ -86,27 +86,61 @@ const Statistics = () => {
         <div className="col-md-6">{genreData && <Bar data={genreData} />}</div>
         <div
           className="col-md-6"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
+          style={{ display: "flex", justifyContent: "center", alignItems: "center"}}
         >
-          <p style={{ fontSize: "18px" }}>
-            Full Statistics API available on:
-            <Link
-              to="https://sonf-info.onrender.com/api/v1/statistics"
-              style={{
-                color: "blue",
-                textDecoration: "underline",
-                fontWeight: "bold",
-                marginLeft: "5px",
-              }}
-              target="_blank"
-            >
-              Get Statistics API
-            </Link>
-          </p>
+          <ol
+            style={{
+              fontSize: "18px",
+              listStyleType: "none",
+              textAlign: "center",
+            }}
+          >
+            <li style={{ marginBottom: "10px" }}>
+              ALL Songs:
+              <Link
+                to="https://sonf-info.onrender.com/api/v1/songs"
+                style={{
+                  color: "blue",
+                  textDecoration: "underline",
+                  fontWeight: "bold",
+                  marginLeft: "5px",
+                }}
+                target="_blank"
+              >
+                Get All Songs API
+              </Link>
+            </li>
+            <li style={{ marginBottom: "10px" }}>
+              Get Statistics:
+              <Link
+                to="https://sonf-info.onrender.com/api/v1/statistics"
+                style={{
+                  color: "blue",
+                  textDecoration: "underline",
+                  fontWeight: "bold",
+                  marginLeft: "5px",
+                }}
+                target="_blank"
+              >
+                Get Statistics API
+              </Link>
+            </li>
+            <li style={{ marginBottom: "10px" }}>
+              API Documentation:
+              <Link
+                to="https://documenter.getpostman.com/view/31984521/2sA2r7ziWz"
+                style={{
+                  color: "blue",
+                  textDecoration: "underline",
+                  fontWeight: "bold",
+                  marginLeft: "5px",
+                }}
+                target="_blank"
+              >
+                API Documentation
+              </Link>
+            </li>
+          </ol>
         </div>
       </div>
     </div>

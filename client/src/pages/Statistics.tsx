@@ -6,6 +6,7 @@ import { GET_STATISTICS } from "../services/redux/types";
 import Spinner from "../components/ui/Spinner";
 import { Bar, Pie } from "react-chartjs-2";
 import { CategoryScale, Chart } from "chart.js/auto";
+import { Link } from "react-router-dom";
 Chart.register(CategoryScale);
 
 interface BarData {
@@ -82,9 +83,32 @@ const Statistics = () => {
             {genreData && <Pie data={genreData} width={300} height={300} />}
           </div>
         </div>
+        <div className="col-md-6">{genreData && <Bar data={genreData} />}</div>
+        <div
+          className="col-md-6"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <p style={{ fontSize: "18px" }}>
+            Full Statistics API available on:
+            <Link
+              to="https://sonf-info.onrender.com/api/v1/statistics"
+              style={{
+                color: "blue",
+                textDecoration: "underline",
+                fontWeight: "bold",
+                marginLeft: "5px",
+              }}
+              target="_blank"
+            >
+              Get Statistics API
+            </Link>
+          </p>
+        </div>
       </div>
-      <br />
-      {genreData && <Bar data={genreData} />}
     </div>
   );
 };

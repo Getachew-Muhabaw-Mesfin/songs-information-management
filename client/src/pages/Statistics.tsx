@@ -74,12 +74,17 @@ const Statistics = () => {
         <div className="col-md-6">
           {totalSongs === undefined ? <Spinner /> : <Bar data={barData} />}
         </div>
-        <div className="col-md-6">{genreData && <Bar data={genreData} />}</div>
+        <div className="col-md-6 gx-2">
+          <div
+            style={{ width: "300px", margin: "0 auto", textAlign: "center" }}
+          >
+            <h3>Songs in Genre</h3>
+            {genreData && <Pie data={genreData} width={300} height={300} />}
+          </div>
+        </div>
       </div>
       <br />
-      <div style={{ width: "400px", margin: "0 auto", textAlign: "center" }}>
-        {genreData && <Pie data={genreData} width={300} height={300} />}
-      </div>
+      {genreData && <Bar data={genreData} />}
     </div>
   );
 };

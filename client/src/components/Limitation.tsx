@@ -32,10 +32,7 @@ const Limitation = () => {
           </li>
           <li className="text-start text-muted">
             <span className="h3">
-              The site lacks responsiveness due to the absence of React UI
-              components such as Material UI and Ant Design, necessitating
-              considerable effort to achieve responsiveness using Styled
-              Components.
+              The Site is not  responsive, I have only tested in my laptop 📵📵
             </span>
           </li>
         </ol>

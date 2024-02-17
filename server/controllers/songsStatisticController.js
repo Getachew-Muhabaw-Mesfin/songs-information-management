@@ -3,8 +3,6 @@ const Song = require("../model/song");
 exports.getOverallStatistics = async (req, res) => {
   try {
     const totalSongs = await Song.countDocuments();
-    const totalArtists = await Song.distinct("artist").count();
-    const totalAlbums = await Song.distinct("album").count();
     const genres = ["Country", "Love", "Classical", "Reggae", "Jazz"];
     const totalGenres = genres.length;
     const songsInGenre = {};
@@ -14,12 +12,24 @@ exports.getOverallStatistics = async (req, res) => {
     }
 
     const songsPerArtist = await Song.aggregate([
-      { $group: { _id: "$artist", count: { $sum: 1 } } },
+      {
+        $group: {
+          _id: { $toLower: "$artist" },
+          count: { $sum: 1 },
+        },
+      },
     ]);
+    const totalArtists = songsPerArtist.length;
 
     const songsPerAlbum = await Song.aggregate([
-      { $group: { _id: "$album", count: { $sum: 1 } } },
+      {
+        $group: {
+          _id: { $toLower: "$album" },
+          count: { $sum: 1 },
+        },
+      },
     ]);
+    const totalAlbums = songsPerAlbum.length;
 
     res.json({
       totalSongs,

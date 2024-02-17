@@ -1,30 +1,42 @@
 const Limitation = () => {
   return (
-    <div className="card text-center border-4 " style={{ width: "100%" }}>
-      <div className="card-header text-bg-warning"> ⚠️Limitation of My Work 🧑‍💻</div>
+    <div
+      className="card text-center "
+      style={{ width: "100%", background: "#010101212" }}
+    >
+      <div className="card-header">⚠️Limitation of My Work 🧑‍💻</div>
       <div className="card-body">
         <ol className="lh-lg">
           <li className="text-start text-muted">
-            I am not using any caching, and synchronization techniques like
-            React Query, this leads some performance issue
+            <span  className="h3">
+              I am not using any caching, and synchronization techniques like
+              React Query, this leads some performance issue 📈📈
+            </span>
           </li>
           <li className="text-start text-muted">
-            I have only one Model Called Song
+            <span className="h3"> I have only one Model Called Song 🫙🫙</span>
           </li>
           <li className="text-start text-muted">
-            Even though I have env file in my local Directory I am not ignore it
-            (.gitingore) for ease of development
+            <span className="h3">
+              Even though I have <span style={{ color: "red" }}>.env</span> file
+              in my local Directory I am not ignore it (.gitingore) for ease of
+              development and deployment🧭🧭
+            </span>
           </li>
           <li className="text-start text-muted">
-            I used Bootstrap Modal(updating and creating Songs) Ante Design
-            Popup Component(Delete popup) and react Toast (Notify) without your
-            instruction
+            <span className="h3">
+              I used Bootstrap Modal(updating and creating Songs) Ante Design
+              Delete Confirmation (Delete popup) and react Toast (Notify)
+              without your instruction 😤😤
+            </span>
           </li>
           <li className="text-start text-muted">
-            The site lacks responsiveness due to the absence of React UI
-            components such as Material UI and Ant Design, necessitating
-            considerable effort to achieve responsiveness using Styled
-            Components.
+            <span className="h3">
+              The site lacks responsiveness due to the absence of React UI
+              components such as Material UI and Ant Design, necessitating
+              considerable effort to achieve responsiveness using Styled
+              Components.
+            </span>
           </li>
         </ol>
       </div>
